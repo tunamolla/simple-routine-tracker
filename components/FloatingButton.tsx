@@ -2,13 +2,20 @@ import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { COLORS } from '../constants/constants';
 
-export default function FloatingButton({  })
+interface FloatingButtonProps {
+    onPress: () => void
+}
+
+export default function FloatingButton({ onPress }:FloatingButtonProps )
 {
 
     const insets = useSafeAreaInsets();
 
     return(
-        <TouchableOpacity style={[ styles.container, {bottom: 20 + insets.bottom, right: 20 + insets.right} ]}>
+        <TouchableOpacity 
+            style={[ styles.container, {bottom: 20 + insets.bottom, right: 20 + insets.right} ]}
+            onPress={onPress}
+        >
             <Text style={{ fontSize: 30, color: COLORS.white, fontFamily: 'Bold', marginBottom: 5 }}>+</Text>
         </TouchableOpacity>
     )

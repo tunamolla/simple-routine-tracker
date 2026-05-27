@@ -2,6 +2,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import CreateRoutineMenu from '../../components/CreateRoutineMenu';
 import FloatingButton from "../../components/FloatingButton";
 import RoutineCard from "../../components/RoutineCard";
 import { COLORS } from "../../constants/constants.js";
@@ -20,6 +21,7 @@ const DATA = [
 export default function Index() {
 
   const [isChecked, changeIsChecked] = useState(false);
+  const [isMenuVisible, changeIsMenuVisible] = useState(false);
 
   const renderItem = ({item}: {item: DataType}) => {
     return(
@@ -55,7 +57,13 @@ export default function Index() {
           contentContainerStyle= { styles.listContainer }
         >
         </FlatList>
-        <FloatingButton></FloatingButton>
+        <FloatingButton
+          onPress={() => {changeIsMenuVisible(true)}}
+        ></FloatingButton>
+        <CreateRoutineMenu
+          visible={isMenuVisible}
+          closeMenu={() => {changeIsMenuVisible(false)}}
+        ></CreateRoutineMenu>
       </SafeAreaView>
     </View>
   );
