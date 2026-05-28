@@ -7,6 +7,7 @@ export default function RootLayout() {
   const [fontsLoaded] = useFonts({
     'BoldItalic': require("../../assets/fonts/Inter_24pt-BoldItalic.ttf"),
     'Regular': require("../../assets/fonts/Inter_24pt-Regular.ttf"),
+    'Bold': require("../../assets/fonts/Inter_24pt-Bold.ttf"),
   })
 
   if(!fontsLoaded) return <ActivityIndicator size="large"></ActivityIndicator>

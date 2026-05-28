@@ -16,7 +16,7 @@ export default function FloatingButton({ onPress }:FloatingButtonProps )
             style={[ styles.container, {bottom: 20 + insets.bottom, right: 20 + insets.right} ]}
             onPress={onPress}
         >
-            <Text style={{ fontSize: 30, color: COLORS.white, fontFamily: 'Bold', marginBottom: 5 }}>+</Text>
+            <Text style={{ fontSize: 30, color: COLORS.background, fontFamily: 'Bold', marginBottom: 5 }}>+</Text>
         </TouchableOpacity>
     )
 }
