@@ -19,7 +19,11 @@ const DATA = [
 ]
 
 export default function Index() {
-
+  const [data, setData] = useState<DataType[]>([
+    {id: "1", title: "Play 3 chess games."},
+    {id: "2", title: "Do your skincare."},
+    {id: "3", title: "Read 10 pages"}
+  ]);
   const [isChecked, changeIsChecked] = useState(false);
   const [isMenuVisible, changeIsMenuVisible] = useState(false);
 
@@ -30,6 +34,17 @@ export default function Index() {
       ></RoutineCard>
     );
   };
+
+  const addRoutine = (title: string) => {
+    if(title.trim() === '') return;
+
+    const newRoutine: DataType = {
+      id : Date.now().toString(),
+      title: title
+    };
+
+    setData(prevData =>[...prevData, newRoutine] );
+  }
 
   const toggleCheckbox = (isChecked: boolean) => {
     console.log(isChecked);
@@ -51,7 +66,7 @@ export default function Index() {
           <Text style={ styles.underTitle }>You haven't completed today yet!</Text>
         </View>
         <FlatList
-          data={DATA}
+          data={data}
           renderItem={renderItem}
           keyExtractor={item => item.id}
           contentContainerStyle= { styles.listContainer }
@@ -63,6 +78,7 @@ export default function Index() {
         <CreateRoutineMenu
           visible={isMenuVisible}
           closeMenu={() => {changeIsMenuVisible(false)}}
+          onCreate={addRoutine}
         ></CreateRoutineMenu>
       </SafeAreaView>
     </View>

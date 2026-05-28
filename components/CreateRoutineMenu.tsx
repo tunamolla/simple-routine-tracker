@@ -1,14 +1,16 @@
+import { useState } from 'react';
 import { Modal, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { COLORS } from '../constants/constants';
 
 interface CreateRoutineMenuProps {
     visible: boolean
     closeMenu: () => void
+    onCreate: (title:string) => void
 }
 
-export default function CreateRoutineMenu({ visible, closeMenu }: CreateRoutineMenuProps )
+export default function CreateRoutineMenu({ visible, closeMenu, onCreate }: CreateRoutineMenuProps )
 {
-
+  const [routineText, changeRoutineText] = useState(" ");
     return(
       <Modal
         transparent={true}
@@ -28,9 +30,15 @@ export default function CreateRoutineMenu({ visible, closeMenu }: CreateRoutineM
                       placeholder='Please enter here...'
                       style={styles.routineInput}
                       placeholderTextColor={COLORS.secondary}
+                      value={routineText}
+                      onChangeText={changeRoutineText}
                     ></TextInput>
                   </View>
-                  <TouchableOpacity style={styles.createButton}>
+                  <TouchableOpacity style={styles.createButton} onPress={() => {
+                    onCreate(routineText);
+                    closeMenu();
+                    changeRoutineText('');
+                  }}>
                     <Text style={styles.createButtonText}>Create</Text>
                   </TouchableOpacity>
                 </View>
