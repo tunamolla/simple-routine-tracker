@@ -27,10 +27,15 @@ export default function Index() {
   const [isChecked, changeIsChecked] = useState(false);
   const [isMenuVisible, changeIsMenuVisible] = useState(false);
 
+  const deleteRoutine = (id: string) => {
+    setData(prevData => prevData.filter(item => item.id !== id));
+  };
+
   const renderItem = ({item}: {item: DataType}) => {
     return(
       <RoutineCard
         title={ item.title }
+        deleteObj={() => deleteRoutine(item.id)}
       ></RoutineCard>
     );
   };
@@ -43,7 +48,7 @@ export default function Index() {
       title: title
     };
 
-    setData(prevData =>[...prevData, newRoutine] );
+    setData(prevData => [...prevData, newRoutine] );
   }
 
   const toggleCheckbox = (isChecked: boolean) => {
